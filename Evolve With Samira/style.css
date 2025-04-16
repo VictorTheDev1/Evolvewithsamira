@@ -25,17 +25,18 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 30px;
+    padding: 5px 1cm;
     background-color: #f8f8f8;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.20);
     position: relative;
     z-index: 1000;
+    margin-bottom: 15px;
     border-radius: 10px;
 }
 
 /* Logo */
 #logo img {
-    height: auto;
+    height: 50;
     width: 87px;
 }
 
@@ -137,6 +138,7 @@ body {
     padding: 60px 20px;
     background-color: #fff;
     display: flex;
+    border-radius: 6px;
     justify-content: center;
 }
 
@@ -313,6 +315,7 @@ body {
     font-size: 2rem;
     margin-bottom: 30px;
     color: #222;
+    font-family: ubuntu;
     font-weight: bold;
 }
 
