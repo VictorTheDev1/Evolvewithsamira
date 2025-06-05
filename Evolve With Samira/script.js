@@ -66,3 +66,13 @@ playBtn.addEventListener('click', () => {
       document.getElementById("countdown").innerHTML =
         `⏳ ${days}d ${hours}h ${minutes}m ${seconds}s remaining`;
     }, 1000);
+
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const hamburger = document.querySelector(".hamburger");
+    const navLinks = document.querySelector(".nav-links");
+
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+  });
