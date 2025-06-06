@@ -11,7 +11,6 @@
 body {
     line-height: 1.6;
     color: #333;
-   background: linear-gradient(to left, #f0f0f0, #e0e0e0);
     padding: 20px;
 }
 /* Header Styling */
@@ -31,109 +30,105 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.20);
     position: relative;
     z-index: 1000;
-    margin-bottom: 15px;
+
     border-radius: 10px;
 }
 
-/* Logo */
-#logo img {
-    height: 50;
-    width: 87px;
+/* LOGO image */
+    .img-lg {
+      width: 100px;
+      height: 70px;
+      object-fit: contain;
+    }
+/* Reset default spacing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Nav */
-#navbar ul {
-    display: flex;
-    list-style: none;
-    gap: 30px;
+/* Navbar Styling */
+#navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #0f172a;
+  z-index: 1000;
+  padding: 10px 20px; /* smaller padding */
+}
+.down{
+  margin-bottom: 50px;
+
 }
 
-#navbar ul li a {
-    text-decoration: none;
-    font-weight: 500;
-    color: #333;
-    padding: 8px 14px;
-    border-radius: 6px;
-    transition: all 0.3s ease;
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+
 }
 
-#navbar ul li a:hover,
-#navbar ul li a.active {
-    background-color: #222;
-    color: #fff;
+/* Logo size */
+.img-lg {
+  width: 60px;
+  height: auto;
 }
 
-/* Hamburger Menu (Mobile) */
-/* Hamburger menu hidden by default on large screens */
-.menu-toggle {
+/* Nav Links */
+.nav-links {
+  display: flex;
+  gap: 15px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* Icons section */
+.nav-icons {
+  display: flex;
+  gap: 10px;
+  font-size: 18px;
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: white;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .nav-links {
     display: none;
     flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
+    width: 100%;
+    background-color: #2d1f1f;
+    margin-top: 10px;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .nav-icons {
+    margin-top: 10px;
+  }
 }
 
-.menu-toggle span {
-    width: 25px;
-    height: 3px;
-    background-color: #333;
-    border-radius: 3px;
-}
-
-/* Responsive Navbar */
-@media (max-width: 768px) {
-    #navbar {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background-color: #f8f8f8;
-        padding: 20px;
-        border-top: 1px solid #ddd;
-    }
-
-    #navbar.active {
-        display: flex;
-        flex-direction: column;
-    }
-
-    #navbar ul {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .menu-toggle {
-        display: flex;
-    }
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    #navbar {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background-color: #f8f8f8;
-        border-top: 1px solid #ddd;
-        display: none;
-        flex-direction: column;
-        padding: 20px 30px;
-    }
-
-    #navbar.active {
-        display: flex;
-    }
-
-    #navbar ul {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .menu-toggle {
-        display: flex;
-    }
-}
 
 #about-samira {
     padding: 60px 20px;
@@ -716,6 +711,7 @@ body {
   font-size: 2rem;
   line-height: 1.5;
   margin-bottom: 15px;
+  font-family: ubuntu;
 }
 
 .highlight-name {
@@ -741,7 +737,6 @@ body {
   max-width: 100%;
   height: auto;
   border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 /* Focus Section */
@@ -799,11 +794,7 @@ body {
   flex-wrap: wrap;
 }
 
-.nav-logo {
-  font-weight: bold;
-  font-size: 1.4rem;
-  color: #4f46e5;
-}
+
 .st1{
     font-family: Anton;
     color: #ff8197;
@@ -831,13 +822,13 @@ body {
 
 .nav-links a {
   text-decoration: none;
-  color: #333;
+  color: #fff;
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
 .nav-links a:hover {
-  color: #4f46e5;
+  color: #d124a3;
 }
 
 .nav-icons {
@@ -858,10 +849,25 @@ body {
     display: none;
     flex-direction: column;
     width: 100%;
-    background: white;
+     background: #0f172a;
+
     margin-top: 10px;
     border-top: 1px solid #ddd;
+    text-align: center;
   }
+.nav-links a {
+  text-decoration: none;
+  color: #fff;
+  text-align: center;
+  font-weight: 500;
+  font-family: ubuntu;
+  font-size: 21px;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #d124a3;
+}
 
   .nav-links.active {
     display: flex;
@@ -874,4 +880,15 @@ body {
   .nav-icons {
     display: none;
   }
+  .h21 span{
+    font-size: 19px;
+}
+.revival-text h1 {
+  font-size: 1.5rem;
+}
+}
+.h21{
+    font-size: 24px;
+    margin-top: -35px;
+    font-family: ubuntu;
 }

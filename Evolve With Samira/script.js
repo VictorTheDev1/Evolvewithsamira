@@ -1,18 +1,3 @@
-    const menuToggle = document.getElementById("menu-toggle");
-    const navbar = document.getElementById("navbar");
-
-    menuToggle.addEventListener("click", () => {
-        navbar.classList.toggle("active");
-    });
-
-    const playBtn = document.querySelector('.play-btn');
-const videoPlayer = document.querySelector('.video-player');
-const videoContainer = document.querySelector('.video-container');
-
-playBtn.addEventListener('click', () => {
-    videoContainer.classList.add('active');
-    videoPlayer.play();
-});
 
   const form = document.getElementById("newsletter-form");
   const message = document.getElementById("form-message");
@@ -46,6 +31,7 @@ playBtn.addEventListener('click', () => {
   });
 
 
+
    const eventDate = new Date("2025-06-14T09:00:00Z").getTime(); // 10AM WAT = 9AM UTC
 
     const countdownTimer = setInterval(() => {
@@ -67,12 +53,7 @@ playBtn.addEventListener('click', () => {
         `⏳ ${days}d ${hours}h ${minutes}m ${seconds}s remaining`;
     }, 1000);
 
-
-  document.addEventListener("DOMContentLoaded", function () {
-    const hamburger = document.querySelector(".hamburger");
-    const navLinks = document.querySelector(".nav-links");
-
-    hamburger.addEventListener("click", () => {
-      navLinks.classList.toggle("active");
-    });
-  });
+  function toggleMenu() {
+    const links = document.getElementById('navLinks');
+    links.classList.toggle('show');
+  }
