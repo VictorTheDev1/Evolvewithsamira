@@ -6,7 +6,7 @@
     e.preventDefault();
 
     const formData = new FormData(form);
-    const endpoint = "https://formsubmit.co/ajax/evolvedusolutions@gmail.com";
+    const endpoint = "https://formsubmit.co/ajax/samirao.official@gmail.com";
 
     message.textContent = "Subscribing...";
     message.style.color = "#6366f1";
@@ -57,3 +57,15 @@
     const links = document.getElementById('navLinks');
     links.classList.toggle('show');
   }
+
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const videoContainer = document.querySelector(".video-container");
+    const playButton = document.querySelector(".play-btn");
+    const video = document.querySelector(".video-player");
+
+    playButton.addEventListener("click", function () {
+      videoContainer.classList.add("active");
+      video.play();
+    });
+  });
