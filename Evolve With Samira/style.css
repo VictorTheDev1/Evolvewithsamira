@@ -550,14 +550,14 @@ body {
   color: #f3f4f6;
 }
 
-.calendar-buttons {
+.end-btn {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 15px;
 }
 
-.calendar-buttons a {
+.end-btn a {
   display: inline-block;
   padding: 12px 24px;
   border-radius: 20px;
@@ -568,9 +568,17 @@ body {
   transition: all 0.3s ease;
 }
 
-.calendar-buttons a:hover {
+.end-btn a:hover {
   background: #021b52;
   transform: scale(1.05);
+}
+
+.event-end {
+  font-size: 1.2rem;
+  color: #f39c12;
+  margin-bottom: 20px;
+  font-family: ubuntu;
+
 }
 
 @keyframes fadeInUp {
