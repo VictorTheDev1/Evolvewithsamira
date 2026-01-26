@@ -507,7 +507,7 @@ body {
 .event-container {
   max-width: 600px;
   width: 100%;
-  background: linear-gradient(to right, #021b52, #331875);
+  background: linear-gradient(to right, #0d3283, #0f5bb8);
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
@@ -564,12 +564,12 @@ body {
   text-decoration: none;
   color: white;
   font-family: ubuntu;
-  background: #331875;
+  background: #021b52;
   transition: all 0.3s ease;
 }
 
 .end-btn a:hover {
-  background: #021b52;
+  background: #0f2a65;
   transform: scale(1.05);
 }
 
@@ -622,6 +622,15 @@ body {
   gap: 40px;
   max-width: 1200px;
   margin: 0 auto;
+  margin-top: 90px;
+}
+
+@media (max-width: 600px) {
+  .revival-container {
+    flex-direction: column;
+    margin-top: 0px;
+    text-align: left
+  }
 }
 
 .revival-text {
@@ -843,16 +852,17 @@ body {
     background-color: #4e46e59d;
 }
 .bookme{
-    margin-top: 20px;
     display: flex;
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
-    margin-top: 60px;
+    margin-top: 10px;
 }
-.bookme h1{
+.book{
     font-size: 25px;
-    font-family: ubuntu;
+    font-family: Ubuntu, sans-serif;
+    text-align: center;
+    margin-top: 40px;
 }
  .modern-footer {
     background: #0f172a;

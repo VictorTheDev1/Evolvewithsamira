@@ -6,7 +6,7 @@
     e.preventDefault();
 
     const formData = new FormData(form);
-    const endpoint = "https://formsubmit.co/ajax/samirao.official@gmail.com";
+    const endpoint = "https://formsubmit.co/ajax/moradeyovictor@gmail.com";
 
     message.textContent = "Subscribing...";
     message.style.color = "#6366f1";
