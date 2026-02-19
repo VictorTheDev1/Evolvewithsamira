@@ -1,0 +1,50 @@
+# Create an ICS file for the event "Steeped In Grace"
+
+from datetime import datetime
+import uuid
+
+# Event details
+event_title = "Steeped In Grace - Tea Party: Rediscover Purpose"
+description = """Hosted by Pastor Samira.
+Guest Speakers: Mrs Magdalene Kolawole and Miss Jennise Whiteman.
+
+Light refreshments, worship and prayer, inspirational testimonies and more.
+
+Free entry but registration is required.
+Register via Eventbrite: https://bit.ly/46hY6Tn
+"""
+
+location = "17 Pegasus House, Burely Way, 3rd Floor, Leicester LE1 3BH, United Kingdom"
+
+# Event date and time (14 March 2026, 2:00 PM UK time)
+start = datetime(2026, 3, 14, 14, 0, 0)
+end = datetime(2026, 3, 14, 17, 0, 0)  # Assuming 3-hour duration
+
+# Format datetime in ICS format (UTC not specified, keeping local)
+dtstart = start.strftime("%Y%m%dT%H%M%S")
+dtend = end.strftime("%Y%m%dT%H%M%S")
+dtstamp = datetime.utcnow().strftime("%Y%m%dT%H%M%SZ")
+
+uid = str(uuid.uuid4())
+
+ics_content = f"""BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Yahweh Agenda Hour Ministries//Steeped In Grace//EN
+BEGIN:VEVENT
+UID:{uid}
+DTSTAMP:{dtstamp}
+DTSTART:{dtstart}
+DTEND:{dtend}
+SUMMARY:{event_title}
+DESCRIPTION:{description}
+LOCATION:{location}
+END:VEVENT
+END:VCALENDAR
+"""
+
+file_path = "/mnt/data/Steeped_In_Grace_Tea_Party.ics"
+
+with open(file_path, "w", encoding="utf-8") as f:
+    f.write(ics_content)
+
+file_path

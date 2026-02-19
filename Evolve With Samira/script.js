@@ -69,3 +69,32 @@
       video.play();
     });
   });
+
+const modal = document.getElementById("reminderModal");
+const openBtn = document.getElementById("openReminder");
+const closeBtn = document.querySelector(".close");
+
+openBtn.onclick = function() {
+  modal.style.display = "flex";
+}
+
+closeBtn.onclick = function() {
+  modal.style.display = "none";
+}
+
+window.onclick = function(e) {
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
+}
+
+function showOptions(type) {
+  document.getElementById("appleOptions").style.display = "none";
+  document.getElementById("androidOptions").style.display = "none";
+
+  if (type === "apple") {
+    document.getElementById("appleOptions").style.display = "block";
+  } else {
+    document.getElementById("androidOptions").style.display = "block";
+  }
+}
