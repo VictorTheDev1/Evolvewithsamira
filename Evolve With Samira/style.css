@@ -622,7 +622,7 @@ body {
   gap: 40px;
   max-width: 1200px;
   margin: 0 auto;
-  margin-top: 90px;
+  margin-top: 60px;
 }
 
 @media (max-width: 600px) {
@@ -659,7 +659,6 @@ body {
 }
 
 .revival-image {
-  flex: 1;
   min-width: 250px;
   text-align: center;
 }
@@ -847,6 +846,7 @@ body {
     font-family: ubuntu;
     font-size: 18px;
     transition: background-color 0.3s ease;
+    text-align: center;
 }
 .bookme a:hover {
     background-color: #4e46e59d;
@@ -863,6 +863,34 @@ body {
     font-family: Ubuntu, sans-serif;
     text-align: center;
     margin-top: 40px;
+}
+
+.bookme1 a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #4f46e5;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: ubuntu;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+
+}
+.bookme1 a:hover {
+    background-color: #4e46e59d;
+}
+.bookme1{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.book1{
+    font-size: 25px;
+    font-family: Ubuntu, sans-serif;
+    text-align: center;
+    margin-top: 2px;
+    margin-bottom: 10px;
 }
  .modern-footer {
     background: #0f172a;
@@ -1024,4 +1052,145 @@ body {
 @keyframes fadeIn {
   from { transform: scale(0.9); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
+}
+
+/* CTA reassurance */
+.cta-note{
+  text-align:center;
+  color:#555;
+  font-size:14px;
+  font-family: ubuntu;
+  margin-bottom: 24px;
+}
+
+/* WHO THIS IS FOR */
+
+.who-for{
+  padding:80px 20px;
+  background:#f9fafb;
+  text-align:center;
+}
+
+.who-container{
+  max-width:800px;
+  margin:auto;
+}
+
+.who-for h2{
+  font-size:2rem;
+  margin-bottom:30px;
+  font-family: ubuntu;
+}
+
+.who-list{
+  list-style:none;
+  padding:0;
+  margin-bottom:25px;
+}
+
+.who-list li{
+  margin:12px 0;
+  font-size:1.05rem;
+  color:#444;
+}
+
+.who-text{
+  margin-bottom:20px;
+  font-size:1rem;
+}
+
+/* HOW IT WORKS */
+
+.how-it-works{
+  padding:80px 20px;
+  background:#ffffff;
+  text-align:center;
+}
+
+.how-container{
+  max-width:1000px;
+  margin:auto;
+}
+
+.how-it-works h2{
+  font-size:2rem;
+  margin-bottom:40px;
+  font-family: ubuntu;
+}
+
+.steps{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:30px;
+  margin-bottom:30px;
+}
+
+.step{
+  background:#f3f4f6;
+  padding:25px;
+  border-radius:12px;
+  transition:transform 0.3s ease;
+}
+
+.step:hover{
+  transform:translateY(-5px);
+}
+
+.step h3{
+  margin-bottom:10px;
+  color:#111827;
+}
+
+/* CTA button */
+
+.cta-btn2{
+  display:inline-block;
+  background:#4f46e5;
+  color:white;
+  padding:12px 26px;
+  border-radius:8px;
+  text-decoration:none;
+  font-family: ubuntu;
+  transition:0.3s;
+}
+
+.cta-btn2:hover{
+  background:#4338ca;
+}
+
+.cta-note{
+  margin-top:15px;
+  color:#555;
+  font-size:14px;
+  text-align: center;
+  font-family: ubuntu;
+}
+.cta-note h2{
+  display:inline-block;
+  margin:0 10px;
+  font-size:16px;
+  text-align: center;
+  color:#555;
+  margin-top: 12px;
+}
+.who{
+    padding: 50px 50px;
+}
+.who h1{
+    font-size: 2rem;
+    font-family: ubuntu;
+    text-align: center;
+    margin-bottom: 13px;
+    margin-top: -20px;
+}
+.who h3{
+    font-size: 1.1rem;
+    color: #555;
+}
+.line{
+    width: 100%;
+    height: 0.1px;
+    background-color: rgba(128, 128, 128, 0.509);
+    border-radius: 2px;
+    margin-bottom: 35px;
 }

@@ -1,35 +1,55 @@
+const form = document.getElementById("newsletter-form");
+const message = document.getElementById("form-message");
 
-  const form = document.getElementById("newsletter-form");
-  const message = document.getElementById("form-message");
+(function(){
+  emailjs.init("oc4vk3E1OUMb-pZlZ");
+})();
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-    const formData = new FormData(form);
-    const endpoint = "https://formsubmit.co/ajax/moradeyovictor@gmail.com";
+  const formData = new FormData(form);
+  const endpoint = "https://formsubmit.co/ajax/moradeyovictor@gmail.com";
 
-    message.textContent = "Subscribing...";
-    message.style.color = "#6366f1";
+  const templateParams = {
+    email: formData.get("email"),
+    to_email: formData.get("email")
+  };
 
-    try {
-      const response = await fetch(endpoint, {
-        method: "POST",
-        body: formData
-      });
+  message.textContent = "Subscribing...";
+  message.style.color = "#6366f1";
 
-      if (response.ok) {
-        message.textContent = "✅ Subscribed successfully!";
-        message.style.color = "green";
-        form.reset();
-      } else {
-        throw new Error("Network error");
-      }
-    } catch (error) {
-      message.textContent = "❌ Not subscribed. Try again.";
-      message.style.color = "red";
-    }
-  });
+  try {
 
+    // Send to you via FormSubmit
+    const response = await fetch(endpoint, {
+      method: "POST",
+      body: formData
+    });
+
+    if (!response.ok) throw new Error("Network error");
+
+    // Send welcome email to subscriber
+    await emailjs.send(
+      "service_j0j9ptf",
+      "template_edhnmrg",
+      templateParams
+    );
+
+    message.textContent = "✅ Subscribed successfully! Check your email.";
+    message.style.color = "green";
+
+    form.reset();
+
+  } catch (error) {
+
+    console.error(error);
+
+    message.textContent = "❌ Not subscribed. Try again.";
+    message.style.color = "red";
+
+  }
+});
 
 
    const eventDate = new Date("2025-06-14T09:00:00Z").getTime(); // 10AM WAT = 9AM UTC
