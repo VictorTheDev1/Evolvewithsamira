@@ -1,101 +1,709 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Book Me | Samira Otung</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book a Consultation | Samira Otung</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link rel="shortcut icon" href="/images/Evolve Transparent-White.png" type="image/x-icon">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink:        #F472B6;
+      --pink-light:  #FBCFE8;
+      --pink-pale:   #FDF2F8;
+      --purple:      #A855F7;
+      --purple-mid:  #C084FC;
+      --purple-light:#E9D5FF;
+      --purple-pale: #FAF5FF;
+      --lavender:    #DDD6FE;
+      --peach:       #FDBA74;
+      --peach-light: #FEF3C7;
+      --mint:        #6EE7B7;
+      --bg:          #FFFBFF;
+      --bg2:         #FDF4FF;
+      --bg3:         #FFF0FB;
+      --text:        #3B1F4E;
+      --text-mid:    #7C5A8E;
+      --text-soft:   #B899C8;
+      --white:       #FFFFFF;
+      --serif: 'Playfair Display', serif;
+      --sans:  'DM Sans', sans-serif;
+      --r-sm: 12px; --r-md: 24px; --r-lg: 40px; --r-full: 999px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); font-weight: 400; overflow-x: hidden; }
+
+    /* Blobs */
+    .blob-wrap { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.15; animation: blobFloat 14s ease-in-out infinite; }
+    .blob-1 { width: 700px; height: 700px; background: var(--purple-mid); top: -200px; right: -200px; animation-delay:0s; }
+    .blob-2 { width: 500px; height: 500px; background: var(--pink); bottom: 0; left: -150px; animation-delay:-5s; }
+    .blob-3 { width: 400px; height: 400px; background: var(--peach); top: 50%; right: 5%; animation-delay:-10s; }
+    @keyframes blobFloat { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-28px) scale(1.04)} }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      height: 72px; padding: 0 6%;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: all 0.4s;
+    }
+    nav.scrolled { background: rgba(255,251,255,0.92); backdrop-filter: blur(16px); box-shadow: 0 2px 24px rgba(168,85,247,0.08); }
+    .nav-logo img { height: 40px; }
+    .nav-links { list-style: none; display: flex; gap: 1.5rem; align-items: center; }
+    .nav-links a { font-size: 0.82rem; font-weight: 500; color: var(--text-mid); text-decoration: none; padding: 6px 14px; border-radius: var(--r-full); transition: all 0.25s; }
+    .nav-links a:hover { background: var(--purple-light); color: var(--purple); }
+    .nav-links a.cta-nav { background: linear-gradient(135deg, var(--purple), var(--pink)); color: white; }
+    .nav-links a.cta-nav:hover { opacity: 0.88; }
+    .hamburger { display: none; background: none; border: none; font-size: 1.5rem; color: var(--text); cursor: pointer; z-index: 600; }
+
+    /* HERO */
+    .hero {
+      min-height: 65vh; display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 0 8% 5rem;
+      position: relative; z-index: 1; overflow: hidden;
+    }
+    .hero-bg-shape {
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, var(--purple-pale) 0%, var(--bg3) 50%, var(--pink-pale) 100%);
+      z-index: -1;
+    }
+    .hero-deco {
+      position: absolute; top: 0; right: 0;
+      width: 45%; height: 100%;
+      background: linear-gradient(135deg, var(--purple-light), var(--pink-light));
+      clip-path: ellipse(80% 100% at 100% 50%);
+      opacity: 0.4; z-index: -1;
+    }
+    .hero-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: white; color: var(--purple);
+      font-size: 0.78rem; font-weight: 500;
+      padding: 6px 16px; border-radius: var(--r-full);
+      margin-bottom: 1.2rem; box-shadow: 0 4px 16px rgba(168,85,247,0.12);
+      animation: fadeUp 0.7s ease both;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 6vw, 6rem);
+      font-weight: 700; line-height: 1.0;
+      color: var(--text);
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+    .hero-title em {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-sub {
+      margin-top: 1.2rem; font-size: 1.05rem; color: var(--text-mid);
+      line-height: 1.8; max-width: 520px;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+    /* floating emojis */
+    .hero-em { position: absolute; font-size: 2rem; animation: floatE 4s ease-in-out infinite; pointer-events: none; }
+    .he1 { top: 15%; right: 12%; animation-delay: 0s; }
+    .he2 { top: 35%; right: 28%; animation-delay: -1.5s; }
+    .he3 { top: 55%; right: 8%; animation-delay: -3s; }
+    @keyframes floatE { 0%,100%{transform:translateY(0) rotate(-5deg)} 50%{transform:translateY(-16px) rotate(8deg)} }
+
+    /* ABOUT */
+    .about {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    }
+    .about-img { overflow: hidden; min-height: 520px; position: relative; }
+    .about-img img { width:100%; height:100%; object-fit:cover; transition: transform 0.6s; }
+    .about:hover .about-img img { transform: scale(1.03); }
+    .about-img-deco {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, transparent 55%, var(--bg2) 100%);
+    }
+    .about-content {
+      background: var(--bg2); padding: 5rem 6%;
+      display: flex; flex-direction: column; justify-content: center;
+      border-left: 3px solid var(--purple-light);
+    }
+    .about-quote {
+      font-family: var(--serif); font-size: clamp(1.4rem, 2vw, 1.9rem);
+      font-style: italic; font-weight: 400; color: var(--text);
+      border-left: 4px solid var(--pink); padding-left: 1.4rem;
+      margin-bottom: 2rem; line-height: 1.5;
+    }
+    .about-text { color: var(--text-mid); line-height: 1.9; font-size: 0.93rem; margin-bottom: 1.2rem; }
+    .about-creds { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1rem; }
+    .cred {
+      padding: 7px 16px; border-radius: var(--r-full);
+      background: white; border: 2px solid var(--purple-light);
+      font-size: 0.72rem; font-weight: 500; color: var(--purple);
+      transition: all 0.25s;
+    }
+    .cred:hover { background: var(--purple); color: white; border-color: var(--purple); }
+
+    /* SECTION COMMONS */
+    section { position: relative; z-index: 1; }
+    .s-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: linear-gradient(135deg, var(--purple-light), var(--pink-light));
+      color: var(--purple); font-size: 0.72rem; font-weight: 600;
+      padding: 5px 14px; border-radius: var(--r-full);
+      letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 1rem;
+    }
+    .s-title {
+      font-family: var(--serif); font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 700; line-height: 1.15; color: var(--text);
+    }
+    .s-title em {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    /* PACKAGES */
+    .packages { padding: 7rem 8%; background: var(--bg3); }
+    .pkg-header { text-align: center; margin-bottom: 4rem; }
+    .pkg-header p { color: var(--text-mid); margin-top: 0.8rem; font-size: 0.95rem; }
+    .pkg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .pkg-card {
+      background: white; border-radius: var(--r-lg);
+      padding: 2.5rem 2rem; text-align: center;
+      border: 2px solid var(--purple-light);
+      transition: all 0.3s; display: flex; flex-direction: column;
+      position: relative; overflow: hidden;
+    }
+    .pkg-card:hover { transform: translateY(-8px); box-shadow: 0 24px 64px rgba(168,85,247,0.14); border-color: var(--purple-mid); }
+    .pkg-card.featured {
+      background: linear-gradient(160deg, var(--purple) 0%, var(--pink) 100%);
+      border-color: transparent; color: white;
+      transform: scale(1.03);
+    }
+    .pkg-card.featured:hover { transform: scale(1.03) translateY(-8px); box-shadow: 0 32px 80px rgba(168,85,247,0.3); }
+    .pkg-badge {
+      display: inline-block; background: var(--peach); color: var(--text);
+      font-size: 0.68rem; font-weight: 600; padding: 4px 12px;
+      border-radius: var(--r-full); margin-bottom: 1.2rem; letter-spacing: 0.05em;
+    }
+    .pkg-icon { font-size: 2.6rem; margin-bottom: 1rem; }
+    .pkg-name { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+    .pkg-card.featured .pkg-name { color: white; }
+    .pkg-price {
+      font-family: var(--serif); font-size: 2.8rem; font-weight: 700;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      line-height: 1; margin: 0.6rem 0 0.3rem;
+    }
+    .pkg-card.featured .pkg-price { background: none; -webkit-text-fill-color: white; }
+    .pkg-dur { font-size: 0.78rem; color: var(--text-soft); margin-bottom: 1.5rem; }
+    .pkg-card.featured .pkg-dur { color: rgba(255,255,255,0.75); }
+    .pkg-div { width: 100%; height: 1px; background: var(--purple-light); margin-bottom: 1.5rem; }
+    .pkg-card.featured .pkg-div { background: rgba(255,255,255,0.25); }
+    .pkg-feats { list-style: none; text-align: left; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; flex: 1; }
+    .pkg-feats li { font-size: 0.86rem; color: var(--text-mid); display: flex; align-items: flex-start; gap: 0.7rem; line-height: 1.5; }
+    .pkg-feats li::before { content: '✦'; color: var(--purple-mid); font-size: 0.55rem; flex-shrink: 0; margin-top: 4px; }
+    .pkg-card.featured .pkg-feats li { color: rgba(255,255,255,0.88); }
+    .pkg-card.featured .pkg-feats li::before { color: rgba(255,255,255,0.6); }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 13px 28px; border-radius: var(--r-full);
+      font-family: var(--sans); font-size: 0.85rem; font-weight: 500;
+      text-decoration: none; border: none; cursor: pointer; transition: all 0.28s;
+    }
+    .btn-grad { background: linear-gradient(135deg, var(--purple), var(--pink)); color: white; box-shadow: 0 8px 28px rgba(168,85,247,0.28); }
+    .btn-grad:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(168,85,247,0.38); }
+    .btn-soft { background: var(--white); color: var(--purple); border: 2px solid var(--purple-light); }
+    .btn-soft:hover { background: var(--purple-light); }
+    .btn-white { background: white; color: var(--purple); }
+    .btn-white:hover { background: var(--purple-light); }
+
+    /* TESTIMONIALS */
+    .testimonials { padding: 7rem 8%; background: var(--bg2); }
+    .testi-header { text-align: center; margin-bottom: 4rem; }
+    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .testi-card {
+      background: white; border-radius: var(--r-lg);
+      padding: 2.5rem 2rem;
+      border: 2px solid var(--purple-light);
+      transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .testi-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(168,85,247,0.12); border-color: var(--purple-mid); }
+    .testi-card::before {
+      content: '"'; font-family: var(--serif); font-size: 6rem;
+      color: var(--purple-light); position: absolute;
+      top: -10px; left: 16px; line-height: 1; pointer-events: none;
+    }
+    .testi-stars { color: var(--peach); font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 1.2rem; }
+    .testi-text {
+      font-family: var(--serif); font-size: 1.05rem; font-style: italic;
+      font-weight: 400; line-height: 1.75; color: var(--text);
+      margin-bottom: 1.8rem; position: relative; z-index: 1;
+    }
+    .testi-author { display: flex; align-items: center; gap: 0.9rem; }
+    .testi-av {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple-light), var(--pink-light));
+      border: 2px solid var(--purple-light);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif); font-size: 1.2rem; color: var(--purple); font-weight: 700;
+    }
+    .testi-name { font-size: 0.85rem; color: var(--text); font-weight: 500; }
+    .testi-role { font-size: 0.75rem; color: var(--text-soft); margin-top: 2px; }
+
+    /* FAQ */
+    .faq { padding: 7rem 8%; }
+    .faq-header { margin-bottom: 3.5rem; }
+    .faq-list { display: flex; flex-direction: column; gap: 1rem; max-width: 780px; }
+    .faq-item {
+      background: white; border-radius: var(--r-md);
+      border: 2px solid var(--purple-light);
+      overflow: hidden; transition: border-color 0.3s;
+      cursor: pointer;
+    }
+    .faq-item:hover { border-color: var(--purple-mid); }
+    .faq-item.open { border-color: var(--purple); }
+    .faq-q {
+      padding: 1.4rem 1.6rem;
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+      font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--text); line-height: 1.4;
+    }
+    .faq-icon {
+      width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+      background: var(--purple-light); display: flex; align-items: center; justify-content: center;
+      color: var(--purple); font-size: 0.9rem; font-weight: 700; transition: all 0.3s;
+    }
+    .faq-item.open .faq-icon { background: var(--purple); color: white; transform: rotate(45deg); }
+    .faq-a {
+      padding: 0 1.6rem; color: var(--text-mid); font-size: 0.9rem; line-height: 1.85;
+      max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s;
+    }
+    .faq-item.open .faq-a { max-height: 200px; padding: 0 1.6rem 1.4rem; }
+
+    /* BOOKING FORM */
+    .booking { padding: 7rem 8%; background: var(--bg3); }
+    .booking-inner { display: grid; grid-template-columns: 1fr 1.5fr; gap: 5rem; align-items: start; }
+    .booking-info h2 { font-family: var(--serif); font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 700; line-height: 1.15; margin-bottom: 1.2rem; }
+    .booking-info h2 em { font-style: italic; background: linear-gradient(135deg,var(--purple),var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .booking-info p { color: var(--text-mid); line-height: 1.9; font-size: 0.92rem; margin-bottom: 2rem; }
+    .booking-details { display: flex; flex-direction: column; gap: 1rem; }
+    .b-detail {
+      display: flex; align-items: center; gap: 1rem;
+      background: white; border-radius: var(--r-md);
+      padding: 1.1rem 1.4rem;
+      border: 2px solid var(--purple-light);
+    }
+    .b-detail-icon { font-size: 1.4rem; flex-shrink: 0; }
+    .b-detail-text strong { display: block; font-size: 0.85rem; font-weight: 500; color: var(--text); }
+    .b-detail-text span { font-size: 0.78rem; color: var(--text-soft); }
+
+    /* Form */
+    .form-card {
+      background: white; border-radius: var(--r-lg);
+      padding: 3rem; border: 2px solid var(--purple-light);
+      box-shadow: 0 16px 60px rgba(168,85,247,0.1);
+    }
+    .form-card h3 {
+      font-family: var(--serif); font-size: 1.8rem; font-weight: 700;
+      color: var(--text); margin-bottom: 2rem; line-height: 1.2;
+    }
+    .form-card h3 em { font-style: italic; background: linear-gradient(135deg,var(--purple),var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.1rem; }
+    .form-group label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-mid); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 13px 16px; border-radius: var(--r-md);
+      background: var(--purple-pale);
+      border: 2px solid var(--purple-light);
+      color: var(--text); font-family: var(--sans); font-size: 0.9rem;
+      outline: none; transition: border-color 0.3s, box-shadow 0.3s;
+      -webkit-appearance: none; appearance: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--purple); box-shadow: 0 0 0 4px rgba(168,85,247,0.1); }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--text-soft); }
+    .form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237C5A8E' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px;
+      background-color: var(--purple-pale);
+    }
+    .form-group select option { background: white; }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    #bookingStatus { font-size: 0.85rem; margin-top: 1rem; min-height: 1.2em; }
+
+    /* FOOTER */
+    footer { background: linear-gradient(135deg, var(--text) 0%, #5B1A7A 100%); color: white; padding: 5rem 8% 2rem; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 4rem; }
+    .footer-brand img { height: 38px; margin-bottom: 1.2rem; filter: brightness(1.2); }
+    .footer-brand p { opacity: 0.7; font-size: 0.88rem; line-height: 1.8; max-width: 240px; }
+    .footer-brand strong { color: var(--pink-light); }
+    .footer-nav h4, .footer-contact h4, .footer-social h4 { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--purple-mid); margin-bottom: 1.4rem; font-weight: 600; }
+    .footer-nav ul { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+    .footer-nav a { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 0.88rem; transition: color 0.25s; }
+    .footer-nav a:hover { color: var(--pink-light); }
+    .footer-contact p { color: rgba(255,255,255,0.65); font-size: 0.85rem; line-height: 2; }
+    .footer-contact a { color: var(--pink-light); text-decoration: none; }
+    .social-icons { display: flex; gap: 0.8rem; }
+    .social-icons a { width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.7); text-decoration: none; font-size: 1.1rem; transition: all 0.25s; }
+    .social-icons a:hover { background: linear-gradient(135deg, var(--purple-mid), var(--pink)); color: white; }
+    .footer-credits { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; text-align: center; color: rgba(255,255,255,0.45); font-size: 0.75rem; }
+    .footer-credits strong { color: var(--pink-light); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+    .reveal { opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s}
+
+    /* RESPONSIVE */
+    @media(max-width:1024px) {
+      .about { grid-template-columns:1fr; }
+      .about-img { min-height:300px; }
+      .pkg-grid, .testi-grid { grid-template-columns:1fr; }
+      .pkg-card.featured { transform:none; }
+      .booking-inner { grid-template-columns:1fr; gap:3rem; }
+      .form-row { grid-template-columns:1fr; }
+      .footer-grid { grid-template-columns:1fr 1fr; }
+    }
+    @media(max-width:768px) {
+      .nav-links { display:none; flex-direction:column; position:fixed; inset:0; background:rgba(255,251,255,.97); justify-content:center; align-items:center; gap:1.5rem; z-index:400; }
+      .nav-links.open { display:flex; }
+      .hamburger { display:block; }
+      .hero { padding:0 6% 4rem; }
+      .form-card { padding:2rem; }
+      .footer-grid { grid-template-columns:1fr; }
+    }
+  </style>
 </head>
 <body>
-  <section class="booking-section">
-    <div class="form-wrapper">
-      <h1>Book a Session with Samira</h1>
-      <p>Let's connect and work together on your journey to purpose and growth.</p>
 
-       <div class="container">
-    <form id="bookingForm">
-      <!-- Hidden Inputs -->
-      <input type="hidden" name="_captcha" value="false" />
-      <input type="hidden" name="_subject" value="New Booking Request!" />
-
-      <!-- Full Name -->
-      <div class="form-group">
-        <label for="name">Full Name</label>
-        <input type="text" id="name" name="name" required />
-      </div>
-
-      <!-- Email -->
-      <div class="form-group">
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" required />
-      </div>
-
-      <!-- Phone -->
-      <div class="form-group">
-        <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" name="phone" />
-      </div>
-
-      <!-- Session Type -->
-      <div class="form-group">
-        <label for="session">Type of Session</label>
-        <select name="session" id="session" required>
-          <option value="">-- Please Select --</option>
-          <option value="One-on-One Coaching">One-on-One Coaching</option>
-          <option value="Group Session">Group Session</option>
-          <option value="Speaking Engagement">Speaking Engagement</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-
-      <!-- Message -->
-       <div class="vh">
-      <div class="form-group">
-        <label for="message">Additional Message</label>
-        <textarea id="message" name="message" rows="5" placeholder="Let us know how we can serve you best..."></textarea>
-      </div>
-      </div>
-
-      <!-- Submit Button -->
-      <button type="submit" class="submit-btn">Send</button>
-
-      <!-- Status Message -->   
-      <div id="statusMessage" class="message"></div>
-    </form>
+  <div class="blob-wrap">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
   </div>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="nav-logo"><img src="../images/Evolve Transparent-White.png" alt="Evolve You Solutions" onerror="this.style.display='none'"></div>
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html" onclick="closeMenu()">Home</a></li>
+      <li><a href="#about" onclick="closeMenu()">About</a></li>
+      <li><a href="#services" onclick="closeMenu()">Services</a></li>
+      <li><a href="#testimonials" onclick="closeMenu()">Testimonials</a></li>
+      <li><a href="#book" class="cta-nav">Book Now ✨</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-shape"></div>
+    <div class="hero-deco"></div>
+    <span class="hero-em he1">🌸</span>
+    <span class="hero-em he2">✨</span>
+    <span class="hero-em he3">💜</span>
+    <div class="hero-pill">💜 Work With Samira</div>
+    <h1 class="hero-title">
+      Your journey<br>to <em>clarity</em><br>starts here.
+    </h1>
+    <p class="hero-sub">Work directly with Samira Otung — life coach, executive mentor, and author — to unlock the beautiful, confident version of yourself you've always known was possible. 🌟</p>
   </section>
-</body>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-img">
+      <img src="../images/Back1.png" alt="Samira Otung">
+      <div class="about-img-deco"></div>
+    </div>
+    <div class="about-content">
+      <div class="s-pill reveal">🌸 Meet Samira</div>
+      <blockquote class="about-quote reveal d1">
+        "I help people stop surviving and start living — with purpose, confidence, and joy."
+      </blockquote>
+      <p class="about-text reveal d2">Samira Otung is a certified life and executive coach, speaker, and author of <em>Rejection</em> — a groundbreaking guide to turning life's setbacks into your greatest springboard. Based in London, she's helped hundreds of individuals and leaders worldwide unlock their full potential.</p>
+      <p class="about-text reveal d2">With a background spanning corporate leadership, ministry, and personal development, Samira brings a rare blend of strategic clarity and deep warmth to every coaching relationship.</p>
+      <div class="about-creds reveal d3">
+        <span class="cred">🎓 Certified Life Coach</span>
+        <span class="cred">👑 Executive Mentor</span>
+        <span class="cred">📖 Published Author</span>
+        <span class="cred">🎤 Speaker</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PACKAGES -->
+  <section class="packages" id="services">
+    <div class="pkg-header reveal">
+      <div class="s-pill">✨ Services & Pricing</div>
+      <h2 class="s-title">Choose your <em>path forward</em></h2>
+      <p>Every package is lovingly tailored to where you are — and where you want to go. 💜</p>
+    </div>
+    <div class="pkg-grid">
+      <div class="pkg-card reveal">
+        <div class="pkg-icon">🌱</div>
+        <div class="pkg-name">Clarity Session</div>
+        <div class="pkg-price">Free</div>
+        <div class="pkg-dur">30 min · One-time discovery call</div>
+        <div class="pkg-div"></div>
+        <ul class="pkg-feats">
+          <li>1-on-1 video call with Samira</li>
+          <li>Goal & challenge discovery</li>
+          <li>Personalised coaching roadmap</li>
+          <li>Zero obligation — completely free</li>
+        </ul>
+        <a href="#book" class="btn btn-soft">Book Free Session →</a>
+      </div>
+      <div class="pkg-card featured reveal d1">
+        <span class="pkg-badge">⭐ Most Popular</span>
+        <div class="pkg-icon">🚀</div>
+        <div class="pkg-name">Transformation Programme</div>
+        <div class="pkg-price">£497</div>
+        <div class="pkg-dur">6 weeks · 6 sessions of 60 mins</div>
+        <div class="pkg-div"></div>
+        <ul class="pkg-feats">
+          <li>Deep-dive 1-on-1 coaching</li>
+          <li>Confidence & mindset transformation</li>
+          <li>Career transition support</li>
+          <li>Accountability check-ins</li>
+          <li>Email support between sessions</li>
+          <li>Personalised action plan</li>
+        </ul>
+        <a href="#book" class="btn btn-white">Book This Programme →</a>
+      </div>
+      <div class="pkg-card reveal d2">
+        <div class="pkg-icon">👑</div>
+        <div class="pkg-name">Executive Coaching</div>
+        <div class="pkg-price">£997</div>
+        <div class="pkg-dur">3 months · 12 sessions of 60 mins</div>
+        <div class="pkg-div"></div>
+        <ul class="pkg-feats">
+          <li>Senior leader & executive focus</li>
+          <li>Leadership presence & influence</li>
+          <li>Strategic career development</li>
+          <li>Priority email & WhatsApp access</li>
+          <li>360° feedback review</li>
+          <li>Monthly progress reports</li>
+        </ul>
+        <a href="#book" class="btn btn-soft">Book Executive Coaching →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="testimonials">
+    <div class="testi-header reveal">
+      <div class="s-pill">💜 Testimonials</div>
+      <h2 class="s-title">Words from those who <em>evolved</em></h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Working with Samira completely changed how I see myself. Within six weeks I had the confidence to apply for the leadership role I'd been afraid of for years — and I got it!"</p>
+        <div class="testi-author">
+          <div class="testi-av">A</div>
+          <div><div class="testi-name">Adaeze M.</div><div class="testi-role">Head of Marketing, London</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal d1">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"I came in feeling stuck and left with a clear, actionable vision for my career. Samira has a rare ability to cut through the noise and get to what really matters."</p>
+        <div class="testi-author">
+          <div class="testi-av">J</div>
+          <div><div class="testi-name">James O.</div><div class="testi-role">Entrepreneur, Lagos</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal d2">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"The executive coaching programme was a turning point. Samira helped me find my voice, lead my team better, and finally feel at peace with my purpose. 💜"</p>
+        <div class="testi-author">
+          <div class="testi-av">R</div>
+          <div><div class="testi-name">Rachel T.</div><div class="testi-role">Director, Financial Services</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="faq-header reveal">
+      <div class="s-pill">🌸 FAQ</div>
+      <h2 class="s-title">Questions, <em>answered.</em></h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal" onclick="toggleFaq(this)">
+        <div class="faq-q">How does the free session work? <span class="faq-icon">+</span></div>
+        <div class="faq-a">The free 30-minute clarity session is a no-obligation call where we explore your current situation, what you want to change, and whether Samira is the right coach for you. There is zero pressure to commit to anything.</div>
+      </div>
+      <div class="faq-item reveal d1" onclick="toggleFaq(this)">
+        <div class="faq-q">Are sessions online or in person? <span class="faq-icon">+</span></div>
+        <div class="faq-a">All sessions are conducted online via video call (Zoom or Google Meet), meaning Samira can work with clients worldwide, regardless of location. 🌍</div>
+      </div>
+      <div class="faq-item reveal d1" onclick="toggleFaq(this)">
+        <div class="faq-q">What areas do you specialise in? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Samira specialises in confidence building, career transition, executive leadership, personal purpose, and overcoming rejection. Every coaching relationship is tailored to your unique situation.</div>
+      </div>
+      <div class="faq-item reveal d2" onclick="toggleFaq(this)">
+        <div class="faq-q">How quickly will I see results? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Many clients report feeling a shift in mindset after just the first session! Deeper transformation typically unfolds over 4–6 weeks of consistent coaching and action-taking between sessions. ✨</div>
+      </div>
+      <div class="faq-item reveal" onclick="toggleFaq(this)">
+        <div class="faq-q">Is everything confidential? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Yes — completely. All sessions are fully confidential. What is shared in coaching stays in coaching. A coaching agreement is signed at the start of every engagement. 🔒</div>
+      </div>
+      <div class="faq-item reveal d1" onclick="toggleFaq(this)">
+        <div class="faq-q">Can I change my package after starting? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Absolutely! If you find you need more depth or a different focus, we can adjust your package. Samira's priority is your progress and happiness, not a rigid structure. 💜</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING FORM -->
+  <section class="booking" id="book">
+    <div class="booking-inner">
+      <div class="booking-info reveal">
+        <div class="s-pill">📅 Book a Session</div>
+        <h2><em>Let's start</em><br>your evolution.</h2>
+        <p>Fill in the form and Samira or her team will be in touch within 24 hours to confirm your session and chat through next steps. We can't wait to meet you! 🌸</p>
+        <div class="booking-details">
+          <div class="b-detail">
+            <span class="b-detail-icon">🎥</span>
+            <div class="b-detail-text">
+              <strong>Online via Video Call</strong>
+              <span>Zoom or Google Meet — anywhere in the world</span>
+            </div>
+          </div>
+          <div class="b-detail">
+            <span class="b-detail-icon">⚡</span>
+            <div class="b-detail-text">
+              <strong>Response within 24 hours</strong>
+              <span>You'll hear from us very soon after submitting</span>
+            </div>
+          </div>
+          <div class="b-detail">
+            <span class="b-detail-icon">🔒</span>
+            <div class="b-detail-text">
+              <strong>100% Confidential</strong>
+              <span>Everything shared stays between you and Samira</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card reveal d1">
+        <h3>Ready to <em>evolve?</em> 🌸</h3>
+        <form id="bookingForm">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_subject" value="New Booking Request — Evolve You Solutions">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" name="first_name" placeholder="Your first name" required>
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" name="last_name" placeholder="Your last name" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" name="email" placeholder="you@example.com" required>
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" name="phone" placeholder="+44 7700 000000">
+          </div>
+          <div class="form-group">
+            <label>I'm interested in…</label>
+            <select name="service" required>
+              <option value="" disabled selected>Choose a package ✨</option>
+              <option>🌱 Free Clarity Session (30 min)</option>
+              <option>🚀 Transformation Programme (6 weeks)</option>
+              <option>👑 Executive Coaching (3 months)</option>
+              <option>🤔 Not sure yet — help me decide!</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tell me about yourself & your goals 💜</label>
+            <textarea name="message" placeholder="What's on your heart? What do you want to achieve?"></textarea>
+          </div>
+          <button type="submit" class="btn btn-grad" style="width:100%">Send My Request ✨</button>
+          <div id="bookingStatus"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="../images/Evolve Transparent-White.png" alt="Evolve You Solutions">
+        <p>Grow in purpose, guided by God — <strong>Evolve with Samira</strong>. 🌸</p>
+      </div>
+      <div class="footer-nav">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="mailto:Evolvedusolutions@gmail.com">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>Reach Out</h4>
+        <p>Email:<br><a href="mailto:Evolvedusolutions@gmail.com">Evolvedusolutions@gmail.com</a></p>
+        <p style="margin-top:.5rem">📍 London, UK</p>
+      </div>
+      <div class="footer-social">
+        <h4>Follow</h4>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/Samiotung/" target="_blank"><i class='bx bxl-facebook'></i></a>
+          <a href="https://www.instagram.com/evolvedusolutions/" target="_blank"><i class='bx bxl-instagram'></i></a>
+          <a href="https://www.youtube.com/@Evolvewithsamira" target="_blank"><i class='bx bxl-youtube'></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-credits"><p>© 2026 <strong>Evolve with Samira</strong>. All rights reserved. Made with 💜</p></div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script>
-    const form = document.getElementById('bookingForm');
-    const statusMsg = document.getElementById('statusMessage');
+    window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>60));
+    function toggleMenu(){document.getElementById('navLinks').classList.toggle('open');}
+    function closeMenu(){document.getElementById('navLinks').classList.remove('open');}
 
-    form.addEventListener('submit', async (e) => {
+    const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.1});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+    function toggleFaq(el){
+      const open=el.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(f=>f.classList.remove('open'));
+      if(!open)el.classList.add('open');
+    }
+
+    (function(){emailjs.init("Tl3e6W8oFsEye18-h");})();
+    document.getElementById('bookingForm').addEventListener('submit',async function(e){
       e.preventDefault();
-
-      const formData = new FormData(form);
-
-      try {
-        const response = await fetch('https://formsubmit.co/ajax/samirao.official@gmail.com', {
-          method: 'POST',
-          headers: { 'Accept': 'application/json' },
-          body: formData
-        });
-
-        if (response.ok) {
-          statusMsg.textContent = 'Sent successfully!';
-          statusMsg.className = 'message success';
-          statusMsg.style.display = 'block';
-          form.reset();
-        } else {
-          throw new Error();
-        }
-      } catch (error) {
-        statusMsg.textContent = '❌ Failed to send. Please try again.';
-        statusMsg.className = 'message error';
-        statusMsg.style.display = 'block';
-      }
+      const fd=new FormData(this),status=document.getElementById('bookingStatus');
+      status.textContent='Sending... 🌸'; status.style.color='var(--purple)';
+      const params={name:fd.get('first_name')+' '+fd.get('last_name'),email:fd.get('email'),phone:fd.get('phone'),service:fd.get('service'),message:fd.get('message'),to_email:'moradeyovictor@gmail.com'};
+      let ok=false;
+      try{await fetch("https://formsubmit.co/ajax/moradeyovictor@gmail.com",{method:"POST",headers:{"Accept":"application/json"},body:fd});ok=true;}catch(err){console.error(err);}
+      try{await emailjs.send("service_haf3a3r","template_stiqomq",params);ok=true;}catch(err){console.error(err);}
+      if(ok){status.textContent="✅ Request sent! We'll be in touch within 24 hours. 💜";status.style.color='var(--purple)';this.reset();}
+      else{status.textContent="Something went wrong. Please email us directly!";status.style.color='#e05555';}
     });
   </script>
-  </html>
+</body>
+</html>
