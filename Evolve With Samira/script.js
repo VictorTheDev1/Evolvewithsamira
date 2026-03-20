@@ -2,55 +2,68 @@ const form = document.getElementById("newsletter-form");
 const message = document.getElementById("form-message");
 
 (function(){
-  emailjs.init("oc4vk3E1OUMb-pZlZ");
+  emailjs.init("Tl3e6W8oFsEye18-h");
 })();
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const formData = new FormData(form);
+  const email = formData.get("email");
   const endpoint = "https://formsubmit.co/ajax/moradeyovictor@gmail.com";
 
   const templateParams = {
-    email: formData.get("email"),
-    to_email: formData.get("email")
+    email: email,
+    to_email: email  // ✅ Make sure your EmailJS template uses {{to_email}} as the TO address
   };
 
   message.textContent = "Subscribing...";
   message.style.color = "#6366f1";
 
-  try {
+  // ✅ Run both independently — don't let one failure kill the other
+  let formSubmitOk = false;
+  let emailJsOk = false;
 
-    // Send to you via FormSubmit
+  // 1. Send to your inbox via FormSubmit
+  try {
     const response = await fetch(endpoint, {
       method: "POST",
+      headers: { "Accept": "application/json" }, // ✅ Required for AJAX mode
       body: formData
     });
 
-    if (!response.ok) throw new Error("Network error");
+    const result = await response.json();
+    if (result.success === "true" || result.success === true) {
+      formSubmitOk = true;
+    } else {
+      console.warn("FormSubmit response:", result);
+    }
+  } catch (err) {
+    console.error("FormSubmit error:", err);
+  }
 
-    // Send welcome email to subscriber
+  // 2. Send welcome email to subscriber via EmailJS
+  try {
     await emailjs.send(
-      "service_j0j9ptf",
-      "template_edhnmrg",
+      "service_haf3a3r",
+      "template_stiqomq",
       templateParams
     );
+    emailJsOk = true;
+  } catch (err) {
+    console.error("EmailJS error:", err);
+  }
 
+  // 3. Show result
+  if (formSubmitOk || emailJsOk) {
     message.textContent = "✅ Subscribed successfully! Check your email.";
     message.style.color = "green";
-
     form.reset();
-
-  } catch (error) {
-
-    console.error(error);
-
-    message.textContent = "❌ Not subscribed. Try again.";
+  } else {
+    message.textContent = "❌ Not subscribed. Please try again.";
     message.style.color = "red";
-
   }
 });
-
 
    const eventDate = new Date("2025-06-14T09:00:00Z").getTime(); // 10AM WAT = 9AM UTC
 

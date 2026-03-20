@@ -56,13 +56,11 @@
     </form>
   </div>
   </section>
- <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </body>
  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
 <script>
 (function(){
-  emailjs.init("oc4vk3E1OUMb-pZlZ");
+  emailjs.init("Tl3e6W8oFsEye18-h");
 })();
 
 const form = document.getElementById("bookingForm");
@@ -78,55 +76,50 @@ form.addEventListener("submit", async function(e) {
     email: formData.get("email"),
     phone: formData.get("phone"),
     message: formData.get("message"),
-    to_email: formData.get("email")
+    to_email: "moradeyovictor@gmail.com"  // ✅ Fixed: send TO your inbox, not the user's email
   };
 
   try {
-
-    // Send form to you
-    await fetch("https://formsubmit.co/ajax/moradeyovictor@gmail.com", {
+    // Send to FormSubmit
+    const formSubmitRes = await fetch("https://formsubmit.co/ajax/moradeyovictor@gmail.com", {
       method: "POST",
       headers: { "Accept": "application/json" },
       body: formData
     });
 
-    // Send confirmation email to the user
+    if (!formSubmitRes.ok) {
+      console.warn("FormSubmit failed, continuing anyway...");
+    }
+
+    // Send via EmailJS
     await emailjs.send(
-      "service_j0j9ptf",
-      "template_edhnmrg",
+      "service_haf3a3r",
+      "template_stiqomq",
       templateParams
     );
 
-    // Show success message
-    statusMsg.textContent = "✅ Registration successful! Your PDF will begin the download shortly.";
+    statusMsg.textContent = "✅ Success! Download starting...";
     statusMsg.className = "message success";
     statusMsg.style.display = "block";
 
     form.reset();
 
-    // Delay before download (2 seconds)
-    setTimeout(function() {
-
-      const downloadLink = document.createElement("a");
-      downloadLink.href = "/Get PDF/EVOLE YOU SOLUTIONS.pdf"; 
-      downloadLink.download = "EVOLE YOU SOLUTIONS.pdf";
-
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      document.body.removeChild(downloadLink);
-
-    }, 2000);
+    setTimeout(() => {
+      const link = document.createElement("a");
+      link.href = "/get-pdf/evolve-you-solutions.pdf";  // ✅ Fixed typo: "evolve" not "evole"
+      link.download = "evolve-you-solutions.pdf";        // ✅ Fixed: explicit filename forces download
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }, 1500);
 
   } catch (error) {
+    console.error("Submission error:", error);
 
-    console.error(error);
-
-    statusMsg.textContent = "❌ Failed to send. Please try again.";
+    statusMsg.textContent = "❌ Something went wrong. Please try again.";
     statusMsg.className = "message error";
     statusMsg.style.display = "block";
-
   }
 });
-
 </script>
   </html>
