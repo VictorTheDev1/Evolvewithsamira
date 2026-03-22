@@ -1,133 +1,38 @@
-const form = document.getElementById("newsletter-form");
-const message = document.getElementById("form-message");
+// Nav scroll
+    window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',scrollY>60));
+    function toggleMenu(){document.getElementById('navLinks').classList.toggle('open');}
+    function closeMenu(){document.getElementById('navLinks').classList.remove('open');}
 
-(function(){
-  emailjs.init("Tl3e6W8oFsEye18-h");
-})();
+    // Reveal on scroll
+    const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.1});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const formData = new FormData(form);
-  const email = formData.get("email");
-  const endpoint = "https://formsubmit.co/ajax/moradeyovictor@gmail.com";
-
-  const templateParams = {
-    email: email,
-    to_email: email  // ✅ Make sure your EmailJS template uses {{to_email}} as the TO address
-  };
-
-  message.textContent = "Subscribing...";
-  message.style.color = "#6366f1";
-
-  // ✅ Run both independently — don't let one failure kill the other
-  let formSubmitOk = false;
-  let emailJsOk = false;
-
-  // 1. Send to your inbox via FormSubmit
-  try {
-    const response = await fetch(endpoint, {
-      method: "POST",
-      headers: { "Accept": "application/json" }, // ✅ Required for AJAX mode
-      body: formData
+    // Video
+    document.getElementById('videoWrapper').addEventListener('click',()=>{
+      document.getElementById('videoWrapper').style.display='none';
+      const p=document.getElementById('videoPlayer'); p.style.display='block'; p.play();
     });
 
-    const result = await response.json();
-    if (result.success === "true" || result.success === true) {
-      formSubmitOk = true;
-    } else {
-      console.warn("FormSubmit response:", result);
+    // Modal
+    document.getElementById('openReminder').addEventListener('click',e=>{e.preventDefault();document.getElementById('reminderModal').classList.add('active');});
+    document.getElementById('closeModal').addEventListener('click',()=>document.getElementById('reminderModal').classList.remove('active'));
+    document.getElementById('reminderModal').addEventListener('click',e=>{if(e.target===e.currentTarget)e.currentTarget.classList.remove('active');});
+    function showOptions(type,ev){
+      document.querySelectorAll('.reminder-options').forEach(el=>el.classList.remove('active'));
+      document.querySelectorAll('.device-btn').forEach(el=>el.classList.remove('active'));
+      document.getElementById(type+'Options').classList.add('active');
+      ev.currentTarget.classList.add('active');
     }
-  } catch (err) {
-    console.error("FormSubmit error:", err);
-  }
 
-  // 2. Send welcome email to subscriber via EmailJS
-  try {
-    await emailjs.send(
-      "service_haf3a3r",
-      "template_stiqomq",
-      templateParams
-    );
-    emailJsOk = true;
-  } catch (err) {
-    console.error("EmailJS error:", err);
-  }
-
-  // 3. Show result
-  if (formSubmitOk || emailJsOk) {
-    message.textContent = "✅ Subscribed successfully! Check your email.";
-    message.style.color = "green";
-    form.reset();
-  } else {
-    message.textContent = "❌ Not subscribed. Please try again.";
-    message.style.color = "red";
-  }
-});
-
-   const eventDate = new Date("2025-06-14T09:00:00Z").getTime(); // 10AM WAT = 9AM UTC
-
-    const countdownTimer = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = eventDate - now;
-
-      if (distance <= 0) {
-        clearInterval(countdownTimer);
-        document.getElementById("countdown").innerHTML = "🎉 The event has started!";
-        return;
-      }
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      document.getElementById("countdown").innerHTML =
-        `⏳ ${days}d ${hours}h ${minutes}m ${seconds}s remaining`;
-    }, 1000);
-
-  function toggleMenu() {
-    const links = document.getElementById('navLinks');
-    links.classList.toggle('show');
-  }
-
-
-  document.addEventListener("DOMContentLoaded", function () {
-    const videoContainer = document.querySelector(".video-container");
-    const playButton = document.querySelector(".play-btn");
-    const video = document.querySelector(".video-player");
-
-    playButton.addEventListener("click", function () {
-      videoContainer.classList.add("active");
-      video.play();
+    // Newsletter
+    (function(){emailjs.init("oc4vk3E1OUMb-pZlZ");})();
+    document.getElementById('newsletter-form').addEventListener('submit',async function(e){
+      e.preventDefault();
+      const fd=new FormData(this), email=fd.get('email'), msg=document.getElementById('form-message');
+      msg.textContent='Subscribing... '; msg.style.color='var(--purple)';
+      let ok=false;
+      try{const r=await fetch("https://formsubmit.co/ajax/Evolvedusolutions@gmail.com",{method:"POST",headers:{"Accept":"application/json"},body:fd});const res=await r.json();if(res.success==="true"||res.success===true)ok=true;}catch(err){console.error(err);}
+      try{await emailjs.send("service_j0j9ptf","template_edhnmrg",{email,to_email:email});ok=true;}catch(err){console.error(err);}
+      if(ok){msg.textContent=' Subscribed! Check your inbox. ';msg.style.color='var(--purple)';this.reset();}
+      else{msg.textContent='Something went wrong. Please try again! or contact us directly.';msg.style.color='#e05555';}
     });
-  });
-
-const modal = document.getElementById("reminderModal");
-const openBtn = document.getElementById("openReminder");
-const closeBtn = document.querySelector(".close");
-
-openBtn.onclick = function() {
-  modal.style.display = "flex";
-}
-
-closeBtn.onclick = function() {
-  modal.style.display = "none";
-}
-
-window.onclick = function(e) {
-  if (e.target === modal) {
-    modal.style.display = "none";
-  }
-}
-
-function showOptions(type) {
-  document.getElementById("appleOptions").style.display = "none";
-  document.getElementById("androidOptions").style.display = "none";
-
-  if (type === "apple") {
-    document.getElementById("appleOptions").style.display = "block";
-  } else {
-    document.getElementById("androidOptions").style.display = "block";
-  }
-}
