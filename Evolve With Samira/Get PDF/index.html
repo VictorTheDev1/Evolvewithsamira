@@ -6,7 +6,7 @@
   <title>5 Confidence Secrets | Samira  </title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="shortcut icon" href="/images/evolve logo black text.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/images/evolve logo.png" type="image/x-icon">
   <link rel="stylesheet" href="style.css">
 
 </head>
@@ -32,8 +32,8 @@
 
     <!-- LEFT: Info panel -->
     <div class="left-panel">
-      <span class="deco-em de1">✨</span>
-      <span class="deco-em de2">🌸</span>
+      <span class="deco-em de1"></span>
+      <span class="deco-em de2"></span>
 
       <div class="panel-pill"> Free Download</div>
 
@@ -49,35 +49,35 @@
         <li class="secret-item">
           <div class="secret-num">1</div>
           <div class="secret-text">
-            <strong>The Identity Shift 🌟</strong>
+            <strong>The Identity Shift</strong>
             <span>How to see yourself the way God sees you</span>
           </div>
         </li>
         <li class="secret-item">
           <div class="secret-num">2</div>
           <div class="secret-text">
-            <strong>Silencing the Inner Critic 🤫</strong>
+            <strong>Silencing the Inner Critic</strong>
             <span>Practical tools to quiet self-doubt for good</span>
           </div>
         </li>
         <li class="secret-item">
           <div class="secret-num">3</div>
           <div class="secret-text">
-            <strong>Confident Body Language 💃</strong>
+            <strong>Confident Body Language</strong>
             <span>How to carry yourself with grace and presence</span>
           </div>
         </li>
         <li class="secret-item">
           <div class="secret-num">4</div>
           <div class="secret-text">
-            <strong>Boundaries That Protect You 🛡️</strong>
+            <strong>Boundaries That Protect You</strong>
             <span>Say yes to what matters and no with confidence</span>
           </div>
         </li>
         <li class="secret-item">
           <div class="secret-num">5</div>
           <div class="secret-text">
-            <strong>Your Daily Confidence Ritual ✨</strong>
+            <strong>Your Daily Confidence Ritual</strong>
             <span>A simple morning practice that changes everything</span>
           </div>
         </li>
@@ -99,7 +99,7 @@
     <div class="right-panel">
       <div class="form-card">
         <div class="form-header">
-          <h2>Get your <em>free copy</em> 🌸</h2>
+          <h2>Get your <em>free copy</em></h2>
           <p>Fill in your details and your download will begin instantly after submitting.</p>
         </div>
         <div class="form-divider"></div>
@@ -140,9 +140,9 @@
             </button>
 
           <div class="trust-row">
-            <span class="trust-badge">🔒 100% Private</span>
-            <span class="trust-badge">📧 No Spam, Ever</span>
-            <span class="trust-badge">🎁 Completely Free</span>
+            <span class="trust-badge">100% Private</span>
+            <span class="trust-badge">No Spam, Ever</span>
+            <span class="trust-badge">Completely Free</span>
           </div>
 
           <div id="statusMessage" class="message"></div>
@@ -178,7 +178,7 @@
       // Loading state
       submitBtn.classList.add('loading');
       submitBtn.disabled = true;
-      btnText.textContent = "Sending... 🌸";
+      btnText.textContent = "Sending...";
 
       const formData = new FormData(form);
       const templateParams = {
@@ -202,7 +202,7 @@
         await emailjs.send("service_haf3a3r", "template_stiqomq", templateParams);
 
         // Success
-        statusMsg.innerHTML = "🎉 <strong>You're all set!</strong> Your download is starting now. Check your inbox too — we've sent you a copy! 💜";
+        statusMsg.innerHTML = "<strong>You're all set!</strong> Your download is starting now. Check your inbox too — we've sent you a copy!";
         statusMsg.className = "message success";
         form.reset();
 
@@ -218,7 +218,7 @@
 
       } catch (error) {
         console.error("Submission error:", error);
-        statusMsg.innerHTML = "😔 <strong>Something went wrong.</strong> Please try again or email us directly at <a href='mailto:Evolvedusolutions@gmail.com'>Evolvedusolutions@gmail.com</a>";
+        statusMsg.innerHTML = "<strong>Something went wrong.</strong> Please try again or email us directly at <a href='mailto:Evolvedusolutions@gmail.com'>Evolvedusolutions@gmail.com</a>";
         statusMsg.className = "message error";
       } finally {
         submitBtn.classList.remove('loading');

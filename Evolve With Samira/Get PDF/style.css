@@ -54,7 +54,7 @@
       backdrop-filter: blur(16px);
       box-shadow: 0 2px 24px rgba(168,85,247,0.08);
     }
-    .nav-logo img { height: 120px; }
+    .nav-logo img { height: 32px; }
     .nav-back {
       display: flex; align-items: center; gap: 8px;
       font-size: 0.82rem; font-weight: 500; color: var(--text-mid);

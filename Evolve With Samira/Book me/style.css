@@ -43,7 +43,7 @@
       transition: all 0.4s;
     }
     nav.scrolled { background: rgba(255,251,255,0.92); backdrop-filter: blur(16px); box-shadow: 0 2px 24px rgba(168,85,247,0.08); }
-    .nav-logo img { height: 120px; }
+    .nav-logo img { height: 32px; }
     .nav-links { list-style: none; display: flex; gap: 1.5rem; align-items: center; }
     .nav-links a { font-size: 0.82rem; font-weight: 500; color: var(--text-mid); text-decoration: none; padding: 6px 14px; border-radius: var(--r-full); transition: all 0.25s; }
     .nav-links a:hover { background: var(--purple-light); color: var(--purple); }
